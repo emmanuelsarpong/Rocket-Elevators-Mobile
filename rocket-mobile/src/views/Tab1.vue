@@ -1,11 +1,5 @@
 <template>
   <ion-page>
-    <ion-header>
-      <!-- <ion-toolbar style="text-align: center"> -->
-          <!-- <img width="50" height="50" src="../../public/assets/R2.png" /> -->
-          <!-- <ion-title size="large">Home</ion-title> -->
-        <!-- </ion-toolbar> -->
-    </ion-header>
     <ion-content :fullscreen="true">
         <ion-header >
           <ion-toolbar style="text-align:center;background:red;">
@@ -16,13 +10,8 @@
       <h1 style="text-align: center;">Offline Elevators</h1>
       <ion-list>
         <ion-item v-for="elevator of elevators" :key="elevator.id" @click="openModal(elevator)">
-          <!-- <img width="23" height="23" src="../../public/assets/R2.png" /> -->
           <ion-label>
             <h2  style="text-align: center">Elevator with Serial Number: {{elevator.serial_number}}</h2>
-            <!-- <h6>Model: {{elevator.model}}</h6>
-            <h6>Type: {{elevator.elevator_type}}</h6> -->
-            <!-- <h6>status: {{elevator.status}}</h6> -->
-            <!-- <h6>ID: {{elevator.id}}</h6> -->
           </ion-label>
         </ion-item>
       </ion-list>
@@ -32,7 +21,6 @@
     </ion-content>
   </ion-page>
 </template>
-
 
 <script lang="ts">
 import {

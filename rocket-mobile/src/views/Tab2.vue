@@ -1,32 +1,20 @@
 <template>
   <ion-page>
-    <ion-header>
-      <!-- <ion-toolbar style="text-align: center"> -->
-          <!-- <img width="50" height="50" src="../../public/assets/R2.png" /> -->
-          <!-- <ion-title size="large">Settings</ion-title> -->
-        <!-- </ion-toolbar> -->
-    </ion-header>
     <ion-content :fullscreen="true">
       <ion-header >
         <ion-toolbar style="text-align: center">
           <img width="50" height="50" src="../../public/assets/R2.png" />
-          <!-- <ion-title size="large">Settings</ion-title> -->
         </ion-toolbar>
       </ion-header>
       <h1 style="text-align: center;">Settings</h1>
-    
-    
-    <!-- <h1 style="text-align: center;">Elevator Settings</h1> -->
     <ion-grid style="text-align: center">
       <ion-button href="/">Sign Out</ion-button>
     </ion-grid>
-
     </ion-content>
   </ion-page>
 </template>
-
-
 <script lang="ts">
+
 import {
   
   IonContent,
