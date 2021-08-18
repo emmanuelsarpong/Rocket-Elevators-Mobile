@@ -65,19 +65,3 @@ export default defineComponent({
   }
 });
 </script>
-
-<style>
-.center {
-  /* display: flex;
-  height: 90vh;
-  width: 100%;
-  align-items: center;
-  justify-content: center; */
-}
-.error-message {
-  /* color: #842029;
-  background-color: #f8d7da;
-  border-color: #f5c2c7;
-  text-align: center; */
-}
-</style>
