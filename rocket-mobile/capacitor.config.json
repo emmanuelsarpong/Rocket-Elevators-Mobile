@@ -1,6 +1,6 @@
 {
 	"appId": "io.ionic.starter",
-	"appName": "Rocket-Elevators-Mobile",
+	"appName": "rocket-mobile",
 	"webDir": "dist",
 	"bundledWebRuntime": false
 }

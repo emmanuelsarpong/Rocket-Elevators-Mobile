@@ -1,6 +1,10 @@
 import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router';
+import firebase from 'firebase/app';
+import 'firebase/auth';
+import 'firebase/firestore';
+import 'firebase/storage';
 
 import { IonicVue } from '@ionic/vue';
 
@@ -22,6 +26,23 @@ import '@ionic/vue/css/display.css';
 
 /* Theme variables */
 import './theme/variables.css';
+import './theme/core.css'
+
+// Your web app's Firebase configuration
+const firebaseConfig = {
+  apiKey: "AIzaSyBuKAhmLwP-Xz8sZLu3jFxLpQWLsU9NF_U",
+  authDomain: "rocket-elevators-mobile-88449.firebaseapp.com",
+  projectId: "rocket-elevators-mobile-88449",
+  storageBucket: "rocket-elevators-mobile-88449.appspot.com",
+  messagingSenderId: "560737924922",
+  appId: "1:560737924922:web:8052e6556ded49a14c8203"
+};
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
+
+export const auth = firebase.auth();
+export const db = firebase.firestore();
+
 
 const app = createApp(App)
   .use(IonicVue)

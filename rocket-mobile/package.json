@@ -1,5 +1,5 @@
 {
-  "name": "rocket-elevators-mobile",
+  "name": "rocket-mobile",
   "version": "0.0.1",
   "private": true,
   "scripts": {
@@ -19,7 +19,8 @@
     "@ionic/vue-router": "^5.4.0",
     "core-js": "^3.6.5",
     "vue": "^3.2.1",
-    "vue-router": "^4.0.0-0"
+    "vue-router": "^4.0.0-0",
+    "vuex": "^4.0.0-rc.2"
   },
   "devDependencies": {
     "@capacitor/cli": "3.1.2",
