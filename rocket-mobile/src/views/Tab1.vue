@@ -12,6 +12,7 @@
         <ion-item v-for="elevator of elevators" :key="elevator.id" @click="openModal(elevator)">
           <ion-label>
             <h2  style="text-align: center">Elevator with Serial Number: {{elevator.serial_number}}</h2>
+            <!-- <h2  style="text-align: center">ID: {{elevator.id}}</h2> -->
           </ion-label>
         </ion-item>
       </ion-list>
@@ -63,7 +64,7 @@ export default defineComponent({
 
   //Display all elevators
   beforeMount() {
-    axios.get('https://whispering-tundra-91467.herokuapp.com/api/Elevators/').then(response => {
+    axios.get('https://whispering-tundra-91467.herokuapp.com/api/elevators').then(response => {
       this.elevators = response.data
       
       //Filter offline elevators
@@ -73,9 +74,3 @@ export default defineComponent({
   }
 });
 </script>
-
-
-
-
-
-

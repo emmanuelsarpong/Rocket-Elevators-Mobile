@@ -10,9 +10,11 @@
       <ion-card>
         <ion-card-header>
           <ion-card-title> Welcome Rocket Elevators Mobile! </ion-card-title>
-          <ion-card-subtitle> Sign In/Up </ion-card-subtitle>
+          <ion-card-subtitle style="text-align: center;"> Sign In/Up </ion-card-subtitle>
         </ion-card-header>
         <ion-card-content>
+
+          
           <form
             @submit.prevent="
               mode === AuthMode.SignIn
@@ -79,6 +81,7 @@ import {
 import { auth } from "../main";
 import { reactive, toRefs } from "vue";
 import { useRouter } from "vue-router";
+// import axios from 'axios'
 
 enum AuthMode {
   SignIn,
@@ -102,6 +105,11 @@ export default {
     IonLabel,
     IonItem,
     IonCardHeader
+  },
+  data() {
+    return {
+      employees: []
+    }
   },
   setup() {
     const router = useRouter();
@@ -165,6 +173,13 @@ export default {
     };
   },
 };
+
+// Verify email
+// verifyEmail() {
+//   axios.get('http://localhost:3000/api/employees/').then(response => {
+//     this.email = response.data
+//   })
+// }
 </script>
 
 <style>

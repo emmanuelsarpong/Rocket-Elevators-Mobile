@@ -3,12 +3,11 @@
       <ion-header>
       <ion-toolbar>
         <ion-title> Serial: {{ elevator.serial_number }}</ion-title>
-        <ion-buttons slot="end">
-          <ion-button @click="dismissModal()"></ion-button>
-        </ion-buttons>
       </ion-toolbar>
     </ion-header>
     <ion-content :fullscreen="true" ion-padding="true">
+      <br>
+      <br>
        <ion-list>
       <ion-item @click="updateStatus">
         <ion-label>
@@ -27,12 +26,16 @@
         <ion-toggle slot="start" name="elevator" placeholder="Change Status" unchecked></ion-toggle>
       </ion-item>
     </ion-list>
+    <br>
+    <ion-grid style="text-align: center">
+      <ion-button href="/tabs/tab1">Close</ion-button>
+    </ion-grid>
     </ion-content>
     </div>
 </template>
 
 <script>
-import { IonContent, IonHeader, IonTitle, IonToolbar, IonButtons, IonButton } from '@ionic/vue';
+import { IonContent, IonHeader, IonTitle, IonButton } from '@ionic/vue';
 import { defineComponent } from 'vue';
 import axios from 'axios'
 
@@ -46,14 +49,13 @@ export default defineComponent({
       content: 'Content',
     }
   },
-  components: { IonContent, IonHeader, IonTitle, IonToolbar, IonButtons, IonButton },
+  components: { IonContent, IonHeader, IonTitle, IonButton },
   methods: {
     dismissModal() {
       console.log('Dismissed!!!')
     },
     updateStatus() {
-      axios.put(`https://whispering-tundra-91467.herokuapp.com/api/Elevators/${this.elevator.id}/online`).then(response => {
-      //  axios.put(`https://whispering-tundra-91467.herokuapp.com/api/interventions/${this.elevator.id}/inprogress`).then(response => {
+      axios.put(`https://whispering-tundra-91467.herokuapp.com/api/Elevators/${this.elevator.id}/`).then(response => {
         this.elevators = response.data
         
         //Change the status to online
