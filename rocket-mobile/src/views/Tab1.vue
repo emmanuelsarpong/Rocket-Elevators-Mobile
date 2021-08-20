@@ -4,7 +4,6 @@
         <ion-header >
           <ion-toolbar style="text-align:center;background:red;">
             <img width="50" height="50" src="../../public/assets/R2.png" />
-            <!-- <ion-title size="large">Offline Elevators</ion-title> -->
           </ion-toolbar>
         </ion-header>
       <h1 style="text-align: center;">Offline Elevators</h1>
@@ -12,7 +11,6 @@
         <ion-item v-for="elevator of elevators" :key="elevator.id" @click="openModal(elevator)">
           <ion-label>
             <h2  style="text-align: center">Elevator with Serial Number: {{elevator.serial_number}}</h2>
-            <!-- <h2  style="text-align: center">ID: {{elevator.id}}</h2> -->
           </ion-label>
         </ion-item>
       </ion-list>

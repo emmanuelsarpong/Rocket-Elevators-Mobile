@@ -1,31 +1,18 @@
 <template>
   <ion-page>
-    <ion-header>
-      <ion-toolbar>
-        <!-- <img width="30" height="30" src="../../public/assets/R2.png" /> -->
-        <ion-title style="text-align: center;">Sign In/Up</ion-title>
-      </ion-toolbar>
-    </ion-header>
+        <ion-header style="text-align: center;">
+          <ion-toolbar>
+            <img width="50" height="50" src="../../public/assets/R2.png" />
+          </ion-toolbar>
+        </ion-header>
     <ion-content :fullscreen="true">
       <ion-card>
         <ion-card-header>
-          <ion-card-title> Welcome Rocket Elevators Mobile! </ion-card-title>
+          <ion-card-title style="text-align: center;">Rocket Elevators Mobile</ion-card-title>
+          <br>
           <ion-card-subtitle style="text-align: center;"> Sign In/Up </ion-card-subtitle>
         </ion-card-header>
         <ion-card-content>
-
-          
-          <form
-            @submit.prevent="
-              mode === AuthMode.SignIn
-                ? signInWithEmailAndPassword(email, password)
-                : signUpWithEmailAndPassword(name, email, password)
-            "
-          >
-            <ion-item v-if="mode === AuthMode.SignUp">
-              <ion-label position="floating">Name</ion-label>
-              <ion-input v-model="name"></ion-input>
-            </ion-item>
             <ion-item>
               <ion-label position="floating">Email</ion-label>
               <ion-input v-model="email"></ion-input>
@@ -38,19 +25,10 @@
               expand="block"
               color="primary"
               class="ion-margin-top"
-              type="submit"
+              @click="signInWithEmailAndPassword"
             >
-              {{ mode === AuthMode.SignIn ? "Sign In" : "Sign Up" }}
+              Sign In
             </ion-button>
-            <ion-button
-              expand="block"
-              color="secondary"
-              class="ion-margin-top"
-              @click="mode = mode === AuthMode.SignIn ? AuthMode.SignUp : AuthMode.SignIn "
-            >
-              {{ mode === AuthMode.SignIn ? "Sign Up" : "Cancel" }}
-            </ion-button>
-          </form>
         </ion-card-content>
         <ion-card-content v-if="errorMsg" class="error-message">
             {{errorMsg}}
@@ -65,7 +43,6 @@ import {
   IonPage,
   IonHeader,
   IonToolbar,
-  IonTitle,
   IonContent,
   IonCard,
   IonCardHeader,
@@ -78,15 +55,7 @@ import {
   IonItem,
 } from "@ionic/vue";
 
-import { auth } from "../main";
-import { reactive, toRefs } from "vue";
-import { useRouter } from "vue-router";
-// import axios from 'axios'
-
-enum AuthMode {
-  SignIn,
-  SignUp,
-}
+import axios from 'axios'
 
 export default {
   name: "Authenication",
@@ -94,7 +63,6 @@ export default {
     IonPage,
     IonHeader,
     IonToolbar,
-    IonTitle,
     IonContent,
     IonCard,
     IonCardSubtitle,
@@ -108,78 +76,41 @@ export default {
   },
   data() {
     return {
-      employees: []
+      employees: [],
+      email: '',
+      password: '',
+      errorMsg: ''
     }
   },
-  setup() {
-    const router = useRouter();
-    const state = reactive({
-      name: "",
-      email: "",
-      password: "",
-      mode: AuthMode.SignIn,
-      errorMsg: "",
-    });
+  methods: {
+    signInWithEmailAndPassword () {
+      console.log('sigining in')
 
-    const signInWithEmailAndPassword = async (
-      email: string,
-      password: string
-    ) => {
+
       try {
-        if (!email || !password) {
-          state.errorMsg = "Email and password required!";
+        if (!this.email || !this.password) {
+          this.errorMsg = "Email and password required!";
           return;
         }
+        
+        axios.get('https://whispering-tundra-91467.herokuapp.com/api/users').then(response => {
+          if (response.data.length === 0) this.errorMsg = 'No users found'
 
-        await auth.signInWithEmailAndPassword(email, password);
-        router.push("/tabs/tab1");
+          const emailExists = response.data.filter(u => u.email === this.email).length > 0
+
+          if (emailExists) {
+            this.$router.push("/tabs/tab1");
+            return
+          }
+
+          this.errorMsg = "User with email not found!";
+        })
       } catch (error) {
-        state.errorMsg = error.message;
+        this.errorMsg = error.message;
       }
-    };
-
-    const signUpWithEmailAndPassword = async (
-      name: string,
-      email: string,
-      password: string
-    ) => {
-      try {
-        if (!name || !email || !password) {
-          state.errorMsg = "Name, email, and password required!";
-          return;
-        }
-
-        // const authRes = await auth.createUserWithEmailAndPassword(
-        //   email,
-        //   password
-        // );
-
-        // db.collection("users").doc(authRes.user?.uid).set({
-        //   name,
-        //   email,
-        // });
-
-        router.push("/tabs/tab1");
-      } catch (error) {
-        state.errorMsg = error.message;
-      }
-    };
-
-    return {
-      ...toRefs(state),
-      signInWithEmailAndPassword,
-      signUpWithEmailAndPassword,
-      AuthMode,
-    };
-  },
-};
-
-// Verify email
-// verifyEmail() {
-//   axios.get('http://localhost:3000/api/employees/').then(response => {
-//     this.email = response.data
-//   })
-// }
+    }
+  }
+}
 </script>
 
 <style>

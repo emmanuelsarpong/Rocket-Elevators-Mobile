@@ -11,21 +11,27 @@
        <ion-list>
       <ion-item @click="updateStatus">
         <ion-label>
-          <h4>ID: {{elevator.id}}</h4>
-          <h4>Column ID: {{elevator.column_id}}</h4>
-          <h4>Model: {{elevator.model}}</h4>
-          <h4>Type: {{elevator.elevator_type}}</h4>
-          <h4>status: {{elevator.status}}</h4>
-          <h4>Commissioning Date: {{elevator.date_of_commissioning}}</h4>
-          <h4>Last Inspection Date: {{elevator.last_inspection}}</h4>
-          <h4>Certificate of Inspection: {{elevator.certificate_of_inspection}}</h4>
-          <h4>Information: {{elevator.information}}</h4>
-          <h4>Created at: {{elevator.created_at}}</h4>
-          <h4>Updated at: {{elevator.updated_at}}</h4>
+          <h6>ID: {{elevator.id}}</h6>
+          <h6>Column ID: {{elevator.column_id}}</h6>
+          <h6>Model: {{elevator.model}}</h6>
+          <h6>Type: {{elevator.elevator_type}}</h6>
+          <h6>status: {{elevator.status}}</h6>
+          <h6>Commissioning Date: {{elevator.date_of_commissioning}}</h6>
+          <h6>Last Inspection Date: {{elevator.last_inspection}}</h6>
+          <h6>Certificate of Inspection: {{elevator.certificate_of_inspection}}</h6>
+          <h6>Information: {{elevator.information}}</h6>
+          <h6>Created at: {{elevator.created_at}}</h6>
+          <h6>Updated at: {{elevator.updated_at}}</h6>
         </ion-label>
         <ion-toggle slot="start" name="elevator" placeholder="Change Status" unchecked></ion-toggle>
       </ion-item>
     </ion-list>
+    <br>
+    <br>
+    <ion-grid style="text-align: center">
+      <img width="150" height="150" src="../../public/assets/R2.png" />
+    </ion-grid>
+    <br>
     <br>
     <ion-grid style="text-align: center">
       <ion-button href="/tabs/tab1">Close</ion-button>
@@ -51,9 +57,6 @@ export default defineComponent({
   },
   components: { IonContent, IonHeader, IonTitle, IonButton },
   methods: {
-    dismissModal() {
-      console.log('Dismissed!!!')
-    },
     updateStatus() {
       axios.put(`https://whispering-tundra-91467.herokuapp.com/api/Elevators/${this.elevator.id}/`).then(response => {
         this.elevators = response.data
