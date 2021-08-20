@@ -38,16 +38,5 @@ export default defineComponent({
       elevators: []
     }
   },
-
-  //Display all elevators
-  beforeMount() {
-    axios.get('https://whispering-tundra-91467.herokuapp.com/api/Elevators/').then(response => {
-      this.elevators = response.data
-      
-      //Filter offline elevators
-      this.elevators = this.elevators.filter((elevator: {status: null}) => elevator.status === 'offline');
-      console.log(this.elevators)
-    })
-  }
 });
 </script>
