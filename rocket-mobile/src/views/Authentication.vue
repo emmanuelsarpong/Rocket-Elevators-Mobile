@@ -56,9 +56,10 @@ import {
 } from "@ionic/vue";
 
 import axios from 'axios'
-
-export default {
-  name: "Authenication",
+import {defineComponent} from 'vue'
+ 
+export default defineComponent({
+  name: "Authentication",
   components: {
     IonPage,
     IonHeader,
@@ -83,11 +84,8 @@ export default {
     }
   },
   methods: {
-    signInWithEmailAndPassword () {
-      console.log('sigining in')
-
-
-      try {
+    async signInWithEmailAndPassword() {
+     try {
         if (!this.email || !this.password) {
           this.errorMsg = "Email and password required!";
           return;
@@ -96,7 +94,7 @@ export default {
         axios.get('https://whispering-tundra-91467.herokuapp.com/api/users').then(response => {
           if (response.data.length === 0) this.errorMsg = 'No users found'
 
-          const emailExists = response.data.filter(u => u.email === this.email).length > 0
+          const emailExists = response.data.filter((u: {email: string}) => u.email === this.email).length > 0
 
           if (emailExists) {
             this.$router.push("/tabs/tab1");
@@ -105,26 +103,12 @@ export default {
 
           this.errorMsg = "User with email not found!";
         })
-      } catch (error) {
+      } 
+      catch (error) {
         this.errorMsg = error.message;
       }
-    }
-  }
-}
-</script>
 
-<style>
-.center {
-  display: flex;
-  height: 90vh;
-  width: 100%;
-  align-items: center;
-  justify-content: center;
-}
-.error-message {
-  color: #842029;
-  background-color: #f8d7da;
-  border-color: #f5c2c7;
-  text-align: center;
-}
-</style>
+    }
+  },
+});
+</script>
